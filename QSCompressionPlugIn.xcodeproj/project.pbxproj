@@ -165,7 +165,11 @@
 			isa = PBXProject;
 			buildConfigurationList = 7F6B3EEF085CE8DF000735A8 /* Build configuration list for PBXProject "QSCompressionPlugIn" */;
 			compatibilityVersion = "Xcode 2.4";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
 			mainGroup = 0259C574FE90428111CA0C5A /* QSCompressionPlugIn */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -219,6 +223,7 @@
 			baseConfigurationReference = 14E61B8C10CFE2D7007663EE /* QSPlugIn_Debug.xcconfig */;
 			buildSettings = {
 				PRODUCT_NAME = "File Compression Module";
+				SDKROOT = macosx;
 				ZERO_LINK = YES;
 			};
 			name = Debug;
@@ -228,6 +233,7 @@
 			baseConfigurationReference = 14E61B8E10CFE2D7007663EE /* QSPlugIn_Release.xcconfig */;
 			buildSettings = {
 				PRODUCT_NAME = "File Compression Module";
+				SDKROOT = macosx;
 				ZERO_LINK = NO;
 			};
 			name = Release;
