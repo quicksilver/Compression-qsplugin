@@ -37,7 +37,7 @@
 			<key>icon</key>
 			<string>com.apple.archiveutility</string>
 			<key>name</key>
-			<string>Compress (Create Archive)</string>
+			<string>Compress</string>
 		</dict>
 		<key>QSFileCompressUsingAction</key>
 		<dict>
