@@ -200,7 +200,7 @@
 		destinationPath=[destinationPath stringByAppendingPathExtension:extension];
 	destinationPath=[destinationPath firstUnusedFilePath];
 	//NSLog(@"info %@ %@",info,destinationPath);
-	BOOL success=[self performSelector:NSSelectorFromString([info objectForKey:@"selector"]) withObject:sourcePaths withObject:destinationPath];
+	BOOL success=(BOOL)[self performSelector:NSSelectorFromString([info objectForKey:@"selector"]) withObject:sourcePaths withObject:destinationPath];
 	if (success){
 		[[NSWorkspace sharedWorkspace] noteFileSystemChanged:[destinationPath stringByDeletingLastPathComponent]];
 		return [QSObject fileObjectWithPath:destinationPath];
