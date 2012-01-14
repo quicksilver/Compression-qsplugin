@@ -15,9 +15,9 @@
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.5.0</string>
+	<string>1.6.0</string>
 	<key>CFBundleVersion</key>
-	<string>15D</string>
+	<string>15F</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2004, Blacktree, Inc.</string>
 	<key>QSActions</key>
@@ -67,6 +67,8 @@
 				<string>zip</string>
 				<string>cpio</string>
 				<string>cpgz</string>
+				<string>tgz</string>
+				<string>tbz</string>
 			</array>
 			<key>directTypes</key>
 			<array>
@@ -81,7 +83,7 @@
 			<key>rankModification</key>
 			<real>4</real>
 			<key>validatesObjects</key>
-			<true/>
+			<false/>
 		</dict>
 	</dict>
 	<key>QSDefaults</key>

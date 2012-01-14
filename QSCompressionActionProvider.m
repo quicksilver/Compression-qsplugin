@@ -5,7 +5,7 @@
 #import <QSCore/QSCore.h>
 
 
-# define pBOMArchiveHelper @"/System/Library/CoreServices/Archive Utility.app"
+# define pArchiveUtility @"/System/Library/CoreServices/Archive Utility.app"
 # define kFileDecompressAction @"QSFileDecompressAction"
 # define kFileCompressAction @"QSFileCompressAction"
 
@@ -212,11 +212,10 @@
 }
 
 
-- (QSObject *)decompressFile:(QSObject *)dObject{
-	NSEnumerator *e=[dObject enumeratorForType:QSFilePathType];
-	NSString *path;
-	while (path=[e nextObject])
-		[[NSWorkspace sharedWorkspace] openFile:path withApplication:pBOMArchiveHelper];
+- (QSObject *)decompressFile:(QSObject *)dObject{        
+    for(NSString *path in [dObject arrayForType:QSFilePathType]) {
+        [[NSWorkspace sharedWorkspace] openFile:path withApplication:pArchiveUtility];
+    }
     return nil;
 }
 @end
