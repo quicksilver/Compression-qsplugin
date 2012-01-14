@@ -17,7 +17,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.6.0</string>
 	<key>CFBundleVersion</key>
-	<string>15F</string>
+	<string>160</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2004, Blacktree, Inc.</string>
 	<key>QSActions</key>
@@ -94,7 +94,7 @@
 	<key>QSPlugIn</key>
 	<dict>
 		<key>author</key>
-		<string>Blacktree, Inc.</string>
+		<string>Patrick Robertson, Blacktree, Inc.</string>
 		<key>categories</key>
 		<array>
 			<string>Files</string>
@@ -102,6 +102,25 @@
 		</array>
 		<key>description</key>
 		<string>File Compress/Decompress Actions</string>
+		<key>extendedDescription</key>
+		<string>&lt;h2&gt;Overview&lt;/h2&gt;
+
+The file compression module allows compression and decompression of files using Apple&apos;s Archive Utility application.
+
+&lt;h2&gt;Actions&lt;/h2&gt;
+&lt;p&gt;3 actions are added to Quicksilver with this module;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Compress - compresses the object(s) in the first pane using the default compression type (see &apos;Preferences&apos; section below)&lt;/li&gt;
+&lt;li&gt;Compress Using... - allows the object(s) in the first pane to be compressed using one of; zip, tbz, tgz, cpio, cpgz&lt;/li&gt;
+&lt;li&gt;Decompress - decompress files using Archive Utility&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Preferences&lt;/h2&gt;
+The module adds a preference pane to Quicksilver, allowing you to;
+&lt;ul&gt;
+&lt;li&gt;Chose whether to compress files to a temporary location first&lt;/li&gt;
+&lt;li&gt;Chose the default compression type to use for the &apos;Compress&apos; action&lt;/li&gt;
+&lt;/ul&gt;</string>
 		<key>icon</key>
 		<string>com.apple.archiveutility</string>
 	</dict>
