@@ -5,9 +5,12 @@
 #import <QSCore/QSCore.h>
 
 
-# define pBOMArchiveHelper @"/System/Library/CoreServices/BOMArchiveHelper.app"
+# define pBOMArchiveHelper @"/System/Library/CoreServices/Archive Utility.app"
 # define kFileDecompressAction @"QSFileDecompressAction"
 # define kFileCompressAction @"QSFileCompressAction"
+
+# define kArchiveUtilityBundleID @"com.apple.archiveutility"
+
 //# import <StuffIt/StuffIt.h>
 
 @implementation QSCompressionActionProvider
@@ -147,10 +150,19 @@
 	
 - (NSArray *)validIndirectObjectsForAction:(NSString *)action directObject:(QSObject *)dObject{
 	NSMutableArray *array=[NSMutableArray array];
+    NSBundle *archiveUtilityBundle = [NSBundle bundleWithIdentifier:kArchiveUtilityBundleID];
+    
 	foreachkey(ident,compressor,[QSReg tableNamed:@"QSFileCompressors"]){
 		QSObject *object=[QSObject objectWithString:ident name:ident type:@"qs.filecompressortype"];
-		NSString *iconName=nil;//[compressor objectForKey:@"icon"];
-		[object setObject:iconName?iconName:@"com.apple.bomarchivehelper" forMeta:kQSObjectIconName];
+		NSString *iconName=[compressor objectForKey:@"icon"];
+        // Attempt to obtain icon from Archive Utility resources folder
+        NSImage *icon = [QSResourceManager imageNamed:iconName inBundle:archiveUtilityBundle];
+        if (!icon) {
+            [object setObject:kArchiveUtilityBundleID forMeta:kQSObjectIconName];
+        }
+        else {
+            [object setIcon:icon];
+        }
 		[array addObject:object];
 	}
 	return array;
