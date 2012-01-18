@@ -5,9 +5,12 @@
 #import <QSCore/QSCore.h>
 
 
-# define pBOMArchiveHelper @"/System/Library/CoreServices/BOMArchiveHelper.app"
+# define pArchiveUtility @"/System/Library/CoreServices/Archive Utility.app"
 # define kFileDecompressAction @"QSFileDecompressAction"
 # define kFileCompressAction @"QSFileCompressAction"
+
+# define kArchiveUtilityBundleID @"com.apple.archiveutility"
+
 //# import <StuffIt/StuffIt.h>
 
 @implementation QSCompressionActionProvider
@@ -140,17 +143,25 @@
 
 
 
-- (QSObject *)compressFile:(QSObject *)dObject{
-	[self compressFile:dObject withFormat:nil];
-	return nil;
+- (QSObject *)compressFile:(QSObject *)dObject {
+	return [self compressFile:dObject withFormat:nil];
 }
 	
 - (NSArray *)validIndirectObjectsForAction:(NSString *)action directObject:(QSObject *)dObject{
 	NSMutableArray *array=[NSMutableArray array];
+    NSBundle *archiveUtilityBundle = [NSBundle bundleWithIdentifier:kArchiveUtilityBundleID];
+    
 	foreachkey(ident,compressor,[QSReg tableNamed:@"QSFileCompressors"]){
 		QSObject *object=[QSObject objectWithString:ident name:ident type:@"qs.filecompressortype"];
-		NSString *iconName=nil;//[compressor objectForKey:@"icon"];
-		[object setObject:iconName?iconName:@"com.apple.bomarchivehelper" forMeta:kQSObjectIconName];
+		NSString *iconName=[compressor objectForKey:@"icon"];
+        // Attempt to obtain icon from Archive Utility resources folder
+        NSImage *icon = [QSResourceManager imageNamed:iconName inBundle:archiveUtilityBundle];
+        if (!icon) {
+            [object setObject:kArchiveUtilityBundleID forMeta:kQSObjectIconName];
+        }
+        else {
+            [object setIcon:icon];
+        }
 		[array addObject:object];
 	}
 	return array;
@@ -161,9 +172,10 @@
 	NSArray *sourcePaths=[dObject validPaths];
 	
 	NSString *type=[iObject stringValue];
-	if (!type)type=[[NSUserDefaults standardUserDefaults]stringForKey:@"QSCompressionDefaultType"];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	if (!type)type=[defaults stringForKey:@"QSCompressionDefaultType"];
 	if (!type)type=@"zip";
-	BOOL useTempFile=[[NSUserDefaults standardUserDefaults]boolForKey:@"QSCompressionCreateTempFile"];
+	BOOL useTempFile=[defaults boolForKey:@"QSCompressionCreateTempFile"];
 	
 	
 	NSString *destinationPath=nil;
@@ -188,7 +200,7 @@
 		destinationPath=[destinationPath stringByAppendingPathExtension:extension];
 	destinationPath=[destinationPath firstUnusedFilePath];
 	//NSLog(@"info %@ %@",info,destinationPath);
-	BOOL success=[self performSelector:NSSelectorFromString([info objectForKey:@"selector"]) withObject:sourcePaths withObject:destinationPath];
+	BOOL success=(BOOL)[self performSelector:NSSelectorFromString([info objectForKey:@"selector"]) withObject:sourcePaths withObject:destinationPath];
 	if (success){
 		[[NSWorkspace sharedWorkspace] noteFileSystemChanged:[destinationPath stringByDeletingLastPathComponent]];
 		return [QSObject fileObjectWithPath:destinationPath];
@@ -200,11 +212,10 @@
 }
 
 
-- (QSObject *)decompressFile:(QSObject *)dObject{
-	NSEnumerator *e=[dObject enumeratorForType:QSFilePathType];
-	NSString *path;
-	while (path=[e nextObject])
-		[[NSWorkspace sharedWorkspace] openFile:path withApplication:pBOMArchiveHelper];
+- (QSObject *)decompressFile:(QSObject *)dObject{        
+    for(NSString *path in [dObject arrayForType:QSFilePathType]) {
+        [[NSWorkspace sharedWorkspace] openFile:path withApplication:pArchiveUtility];
+    }
     return nil;
 }
 @end
