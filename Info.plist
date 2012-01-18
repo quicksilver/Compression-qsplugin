@@ -14,10 +14,10 @@
 	<string>File Compression Module</string>
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
-	<key>CFBundleVersion</key>
-	<string>15A</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.5.0</string>
+	<string>1.6.0</string>
+	<key>CFBundleVersion</key>
+	<string>160</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2004, Blacktree, Inc.</string>
 	<key>QSActions</key>
@@ -37,7 +37,7 @@
 			<key>icon</key>
 			<string>com.apple.archiveutility</string>
 			<key>name</key>
-			<string>Compress (Create Archive)</string>
+			<string>Compress</string>
 		</dict>
 		<key>QSFileCompressUsingAction</key>
 		<dict>
@@ -67,13 +67,14 @@
 				<string>zip</string>
 				<string>cpio</string>
 				<string>cpgz</string>
+				<string>tgz</string>
+				<string>tbz</string>
+				<string>gz</string>
 			</array>
 			<key>directTypes</key>
 			<array>
 				<string>NSFilenamesPboardType</string>
 			</array>
-			<key>displaysResult</key>
-			<integer>1</integer>
 			<key>icon</key>
 			<string>com.apple.archiveutility</string>
 			<key>name</key>
@@ -81,7 +82,7 @@
 			<key>rankModification</key>
 			<real>4</real>
 			<key>validatesObjects</key>
-			<true/>
+			<false/>
 		</dict>
 	</dict>
 	<key>QSDefaults</key>
@@ -92,7 +93,7 @@
 	<key>QSPlugIn</key>
 	<dict>
 		<key>author</key>
-		<string>Blacktree, Inc.</string>
+		<string>Patrick Robertson, Blacktree, Inc.</string>
 		<key>categories</key>
 		<array>
 			<string>Files</string>
@@ -100,6 +101,25 @@
 		</array>
 		<key>description</key>
 		<string>File Compress/Decompress Actions</string>
+		<key>extendedDescription</key>
+		<string>&lt;h2&gt;Overview&lt;/h2&gt;
+
+The file compression module allows compression and decompression of files using Apple&apos;s Archive Utility application.
+
+&lt;h2&gt;Actions&lt;/h2&gt;
+&lt;p&gt;3 actions are added to Quicksilver with this module;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Compress - compresses the object(s) in the first pane using the default compression type (see &apos;Preferences&apos; section below)&lt;/li&gt;
+&lt;li&gt;Compress Using... - allows the object(s) in the first pane to be compressed using one of; zip, tbz, tgz, cpio, cpgz&lt;/li&gt;
+&lt;li&gt;Decompress - decompress files using Archive Utility&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Preferences&lt;/h2&gt;
+The module adds a preference pane to Quicksilver, allowing you to;
+&lt;ul&gt;
+&lt;li&gt;Chose whether to compress files to a temporary location first&lt;/li&gt;
+&lt;li&gt;Chose the default compression type to use for the &apos;Compress&apos; action&lt;/li&gt;
+&lt;/ul&gt;</string>
 		<key>icon</key>
 		<string>com.apple.archiveutility</string>
 	</dict>
@@ -119,7 +139,7 @@
 				<key>extension</key>
 				<string>cpgz</string>
 				<key>icon</key>
-				<string></string>
+				<string>bah-cpgz</string>
 				<key>selector</key>
 				<string>cpgzCompress:destination:</string>
 			</dict>
@@ -130,7 +150,7 @@
 				<key>extension</key>
 				<string>cpio</string>
 				<key>icon</key>
-				<string></string>
+				<string>bah-cpio</string>
 				<key>selector</key>
 				<string>cpioCompress:destination:</string>
 			</dict>
@@ -141,7 +161,7 @@
 				<key>extension</key>
 				<string>tbz</string>
 				<key>icon</key>
-				<string></string>
+				<string>bah-tbz</string>
 				<key>selector</key>
 				<string>tbzCompress:destination:</string>
 			</dict>
@@ -152,7 +172,7 @@
 				<key>extension</key>
 				<string>tgz</string>
 				<key>icon</key>
-				<string></string>
+				<string>bah-tgz</string>
 				<key>selector</key>
 				<string>tgzCompress:destination:</string>
 			</dict>
@@ -163,7 +183,7 @@
 				<key>extension</key>
 				<string>zip</string>
 				<key>icon</key>
-				<string></string>
+				<string>bah-zip</string>
 				<key>selector</key>
 				<string>zipCompress:destination:</string>
 			</dict>
