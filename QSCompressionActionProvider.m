@@ -143,9 +143,8 @@
 
 
 
-- (QSObject *)compressFile:(QSObject *)dObject{
-	[self compressFile:dObject withFormat:nil];
-	return nil;
+- (QSObject *)compressFile:(QSObject *)dObject {
+	return [self compressFile:dObject withFormat:nil];
 }
 	
 - (NSArray *)validIndirectObjectsForAction:(NSString *)action directObject:(QSObject *)dObject{
@@ -173,9 +172,10 @@
 	NSArray *sourcePaths=[dObject validPaths];
 	
 	NSString *type=[iObject stringValue];
-	if (!type)type=[[NSUserDefaults standardUserDefaults]stringForKey:@"QSCompressionDefaultType"];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	if (!type)type=[defaults stringForKey:@"QSCompressionDefaultType"];
 	if (!type)type=@"zip";
-	BOOL useTempFile=[[NSUserDefaults standardUserDefaults]boolForKey:@"QSCompressionCreateTempFile"];
+	BOOL useTempFile=[defaults boolForKey:@"QSCompressionCreateTempFile"];
 	
 	
 	NSString *destinationPath=nil;
