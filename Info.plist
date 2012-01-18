@@ -74,8 +74,6 @@
 			<array>
 				<string>NSFilenamesPboardType</string>
 			</array>
-			<key>displaysResult</key>
-			<integer>1</integer>
 			<key>icon</key>
 			<string>com.apple.archiveutility</string>
 			<key>name</key>
