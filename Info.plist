@@ -69,6 +69,7 @@
 				<string>cpgz</string>
 				<string>tgz</string>
 				<string>tbz</string>
+				<string>gz</string>
 			</array>
 			<key>directTypes</key>
 			<array>
