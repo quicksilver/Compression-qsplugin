@@ -19,3 +19,7 @@ The plugin adds a preference pane to Quicksilver, allowing you to:
 
   * Choose whether to compress files to a temporary location first
   * Choose the default compression type to use for the 'Compress' action
+
+## Trigger Events ##
+
+Event Triggers can be run based on two events in this plugin: Compress and Decompress. For both actions, the "Event Trigger Object" will refer to the archive file.

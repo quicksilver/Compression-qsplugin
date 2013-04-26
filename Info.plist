@@ -118,7 +118,9 @@
 &lt;ul&gt;
 &lt;li&gt;Choose whether to compress files to a temporary location first&lt;/li&gt;
 &lt;li&gt;Choose the default compression type to use for the 'Compress' action&lt;/li&gt;
-&lt;/ul&gt;</string>
+&lt;/ul&gt;
+&lt;h2&gt;Trigger Events&lt;/h2&gt;
+&lt;p&gt;Event Triggers can be run based on two events in this plugin: Compress and Decompress. For both actions, the "Event Trigger Object" will refer to the archive file.&lt;/p&gt;</string>
 		<key>icon</key>
 		<string>com.apple.archiveutility</string>
 	</dict>
@@ -203,6 +205,31 @@
 				<string>com.blacktree.Quicksilver.QSCompressionPlugIn</string>
 				<key>nibName</key>
 				<string>QSCompressionPrefPane</string>
+			</dict>
+		</dict>
+		<key>QSTriggerEvents</key>
+		<dict>
+			<key>QSFileCompressComplete</key>
+			<dict>
+				<key>icon</key>
+				<string>com.apple.archiveutility</string>
+				<key>name</key>
+				<string>File(s) Compressed</string>
+				<key>provider</key>
+				<string>QSCompressionActionProvider</string>
+				<key>type</key>
+				<string>File Compression</string>
+			</dict>
+			<key>QSFileDecompressComplete</key>
+			<dict>
+				<key>icon</key>
+				<string>com.apple.archiveutility</string>
+				<key>name</key>
+				<string>Archive Decompressed</string>
+				<key>provider</key>
+				<string>QSCompressionActionProvider</string>
+				<key>type</key>
+				<string>File Compression</string>
 			</dict>
 		</dict>
 	</dict>
