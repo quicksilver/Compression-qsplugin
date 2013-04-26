@@ -1,0 +1,21 @@
+## Overview ##
+
+The File Compression Plugin allows compression and decompression of files using Apple's Archive Utility application.
+
+## Actions ##
+
+Compress
+  : Compresses the object(s) in the first pane using the default compression type (see 'Preferences' section below)
+
+Compress Using…
+  : Allows the object(s) in the first pane to be compressed using one of: `zip`, `tbz`, `tgz`, `cpio`, `cpgz`
+
+Decompress
+  : Decompress files using Archive Utility
+
+## Preferences ##
+
+The plugin adds a preference pane to Quicksilver, allowing you to:
+
+  * Choose whether to compress files to a temporary location first
+  * Choose the default compression type to use for the 'Compress' action

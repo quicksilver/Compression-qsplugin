@@ -1,9 +1,4 @@
-
-
 #import "QSCompressionActionProvider.h"
-
-#import <QSCore/QSCore.h>
-
 
 # define pArchiveUtility @"/System/Library/CoreServices/Archive Utility.app"
 # define kFileDecompressAction @"QSFileDecompressAction"
