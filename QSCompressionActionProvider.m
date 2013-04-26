@@ -1,9 +1,4 @@
-
-
 #import "QSCompressionActionProvider.h"
-
-#import <QSCore/QSCore.h>
-
 
 # define pArchiveUtility @"/System/Library/CoreServices/Archive Utility.app"
 # define kFileDecompressAction @"QSFileDecompressAction"
@@ -203,7 +198,10 @@
 	BOOL success=(BOOL)[self performSelector:NSSelectorFromString([info objectForKey:@"selector"]) withObject:sourcePaths withObject:destinationPath];
 	if (success){
 		[[NSWorkspace sharedWorkspace] noteFileSystemChanged:[destinationPath stringByDeletingLastPathComponent]];
-		return [QSObject fileObjectWithPath:destinationPath];
+        QSObject *archive = [QSObject fileObjectWithPath:destinationPath];
+        NSDictionary *info = @{@"object": archive};
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"QSEventNotification" object:@"QSFileCompressComplete" userInfo:info];
+		return archive;
 	}else{
 		NSBeep();
 		return nil;
@@ -213,8 +211,11 @@
 
 
 - (QSObject *)decompressFile:(QSObject *)dObject{        
-    for(NSString *path in [dObject arrayForType:QSFilePathType]) {
+    for (QSObject *archive in [dObject splitObjects]) {
+        NSString *path = [archive objectForType:QSFilePathType];
         [[NSWorkspace sharedWorkspace] openFile:path withApplication:pArchiveUtility];
+        NSDictionary *info = @{@"object": archive};
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"QSEventNotification" object:@"QSFileDecompressComplete" userInfo:info];
     }
     return nil;
 }
