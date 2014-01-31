@@ -211,10 +211,12 @@
 		<dict>
 			<key>QSFileCompressComplete</key>
 			<dict>
+				<key>allowMatching</key>
+				<true/>
 				<key>icon</key>
 				<string>com.apple.archiveutility</string>
 				<key>name</key>
-				<string>File(s) Compressed</string>
+				<string>File(s) Compressed ☿</string>
 				<key>provider</key>
 				<string>QSCompressionActionProvider</string>
 				<key>type</key>
@@ -222,16 +224,23 @@
 			</dict>
 			<key>QSFileDecompressComplete</key>
 			<dict>
+				<key>allowMatching</key>
+				<true/>
 				<key>icon</key>
 				<string>com.apple.archiveutility</string>
 				<key>name</key>
-				<string>Archive Decompressed</string>
+				<string>Archive Decompressed ☿</string>
 				<key>provider</key>
 				<string>QSCompressionActionProvider</string>
 				<key>type</key>
 				<string>File Compression</string>
 			</dict>
 		</dict>
+	</dict>
+	<key>QSRequirements</key>
+	<dict>
+		<key>version</key>
+		<string>4001</string>
 	</dict>
 </dict>
 </plist>
