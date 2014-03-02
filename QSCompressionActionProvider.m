@@ -169,7 +169,7 @@
 	NSString *type=[iObject stringValue];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	if (!type)type=[defaults stringForKey:@"QSCompressionDefaultType"];
-	if (!type)type=@"zip";
+	if (!type)type = @"public.zip-archive";
 	BOOL useTempFile=[defaults boolForKey:@"QSCompressionCreateTempFile"];
 	
 	
@@ -190,6 +190,10 @@
 	
 	
 	NSDictionary *info=[[QSReg tableNamed:@"QSFileCompressors"]objectForKey:type];
+    if (!info) {
+        NSLog(@"Could not find handler to compress %@. No related handler could be found. Aborting", type);
+        QSShowAppNotifWithAttributes(@"QSCompressionPlugin", NSLocalizedStringForThisBundle(@"Unable to compress file", @"Error notif title"), [NSString stringWithFormat:NSLocalizedStringForThisBundle(@"An error occurred trying to compress %@", @"Error notif text"), sourcePaths]);
+    }
 	NSString *extension=[info objectForKey:@"extension"];
 	if (extension)
 		destinationPath=[destinationPath stringByAppendingPathExtension:extension];
