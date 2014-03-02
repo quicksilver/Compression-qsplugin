@@ -20,6 +20,21 @@
 	<string>165</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2004, Blacktree, Inc.</string>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>qs.type</string>
+			</array>
+			<key>UTTypeIdentifier</key>
+			<string>qs.filecompressortype</string>
+			<key>UTTypeDescription</key>
+			<string>A QSObject type for archive file types</string>
+			<key>UTTypeTagSpecification</key>
+			<dict/>
+		</dict>
+	</array>
 	<key>QSActions</key>
 	<dict>
 		<key>QSFileCompressAction</key>
@@ -80,7 +95,7 @@
 			<key>name</key>
 			<string>Decompress</string>
 			<key>rankModification</key>
-			<real>4.0</real>
+			<real>4</real>
 			<key>validatesObjects</key>
 			<false/>
 		</dict>
@@ -103,11 +118,11 @@
 		<string>File Compress/Decompress Actions</string>
 		<key>extendedDescription</key>
 		<string>&lt;h2&gt;Overview&lt;/h2&gt;
-&lt;p&gt;The File Compression Plugin allows compression and decompression of files using Apple's Archive Utility application.&lt;/p&gt;
+&lt;p&gt;The File Compression Plugin allows compression and decompression of files using Apple&apos;s Archive Utility application.&lt;/p&gt;
 &lt;h2&gt;Actions&lt;/h2&gt;
 &lt;dl&gt;
 &lt;dt&gt;Compress&lt;/dt&gt;
-&lt;dd&gt;Compresses the object(s) in the first pane using the default compression type (see 'Preferences' section below)&lt;/dd&gt;
+&lt;dd&gt;Compresses the object(s) in the first pane using the default compression type (see &apos;Preferences&apos; section below)&lt;/dd&gt;
 &lt;dt&gt;Compress Using…&lt;/dt&gt;
 &lt;dd&gt;Allows the object(s) in the first pane to be compressed using one of: &lt;code&gt;zip&lt;/code&gt;, &lt;code&gt;tbz&lt;/code&gt;, &lt;code&gt;tgz&lt;/code&gt;, &lt;code&gt;cpio&lt;/code&gt;, &lt;code&gt;cpgz&lt;/code&gt;&lt;/dd&gt;
 &lt;dt&gt;Decompress&lt;/dt&gt;
@@ -117,10 +132,10 @@
 &lt;p&gt;The plugin adds a preference pane to Quicksilver, allowing you to:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Choose whether to compress files to a temporary location first&lt;/li&gt;
-&lt;li&gt;Choose the default compression type to use for the 'Compress' action&lt;/li&gt;
+&lt;li&gt;Choose the default compression type to use for the &apos;Compress&apos; action&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2&gt;Trigger Events&lt;/h2&gt;
-&lt;p&gt;Event Triggers can be run based on two events in this plugin: Compress and Decompress. For both actions, the "Event Trigger Object" will refer to the archive file.&lt;/p&gt;</string>
+&lt;p&gt;Event Triggers can be run based on two events in this plugin: Compress and Decompress. For both actions, the &quot;Event Trigger Object&quot; will refer to the archive file.&lt;/p&gt;</string>
 		<key>icon</key>
 		<string>com.apple.archiveutility</string>
 	</dict>
