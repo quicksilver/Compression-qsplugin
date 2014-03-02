@@ -146,9 +146,9 @@
 	NSMutableArray *array=[NSMutableArray array];
     NSBundle *archiveUtilityBundle = [NSBundle bundleWithIdentifier:kArchiveUtilityBundleID];
     
-	foreachkey(ident,compressor,[QSReg tableNamed:@"QSFileCompressors"]){
-		QSObject *object=[QSObject objectWithString:ident name:ident type:@"qs.filecompressortype"];
-		NSString *iconName=[compressor objectForKey:@"icon"];
+	foreachkey(ident, compressor,[QSReg tableNamed:@"QSFileCompressors"]){
+		QSObject *object = [QSObject objectWithString:ident name:ident type:@"qs.filecompressortype"];
+		NSString *iconName = [compressor objectForKey:@"icon"];
         // Attempt to obtain icon from Archive Utility resources folder
         NSImage *icon = [QSResourceManager imageNamed:iconName inBundle:archiveUtilityBundle];
         if (!icon) {
@@ -168,8 +168,13 @@
 	
 	NSString *type=[iObject stringValue];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	if (!type)type=[defaults stringForKey:@"QSCompressionDefaultType"];
-	if (!type)type = @"public.zip-archive";
+	if (!type) {
+        type=[defaults stringForKey:@"QSCompressionDefaultType"];
+    }
+	if (!type) {
+        type = @"public.zip-archive";
+    }
+
 	BOOL useTempFile=[defaults boolForKey:@"QSCompressionCreateTempFile"];
 	
 	
@@ -187,9 +192,10 @@
 			[[[sourcePaths lastObject]lastPathComponent]stringByDeletingPathExtension]];
 	}
 	
-	
-	
-	NSDictionary *info=[[QSReg tableNamed:@"QSFileCompressors"]objectForKey:type];
+	// Make sure we have a UTI
+	type = QSUTIForAnyTypeString(type);
+    
+	NSDictionary *info=[[QSReg tableNamed:@"QSFileCompressors"] objectForKey:type];
     if (!info) {
         NSLog(@"Could not find handler to compress %@. No related handler could be found. Aborting", type);
         QSShowAppNotifWithAttributes(@"QSCompressionPlugin", NSLocalizedStringForThisBundle(@"Unable to compress file", @"Error notif title"), [NSString stringWithFormat:NSLocalizedStringForThisBundle(@"An error occurred trying to compress %@", @"Error notif text"), sourcePaths]);
