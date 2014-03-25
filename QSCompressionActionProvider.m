@@ -183,8 +183,11 @@
 	if ([sourcePaths count]>1){
 		destinationPath=[destinationPath stringByAppendingPathComponent:@"Archive"];
 	}else{
-		destinationPath=[destinationPath stringByAppendingPathComponent:
-			[[[sourcePaths lastObject]lastPathComponent]stringByDeletingPathExtension]];
+        NSString *destinationFileName = [[sourcePaths lastObject] lastPathComponent];
+        if (![dObject isFolder]) {
+            destinationFileName = [destinationFileName stringByDeletingPathExtension];
+        }
+		destinationPath=[destinationPath stringByAppendingPathComponent:destinationFileName];
 	}
 	
 	
