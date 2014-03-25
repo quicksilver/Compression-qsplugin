@@ -5,6 +5,13 @@ This repository contains the current source code of a the Quicksilver Plugin / M
 
 Always be sure to check the [Google Groups](http://groups.google.com/group/blacktree-quicksilver/topics?gvc=2) first incase there's a solution to your problem, as well as the [QSApp.com Wiki](http://qsapp.com/wiki/).
 
+Quicksilver File Compression Plugin
+-----------------------------------
+
+This code handles most file formats using OSX's built-in `Archive Utility.app`.
+
+For `7z` files, this plugin use the `7zr` executable from the [`p7zip` project](http://p7zip.sourceforge.net/). The source is available [from SourceForge](https://sourceforge.net/projects/p7zip/files/).
+
 
 Before You Try It Out
 ---------------------
