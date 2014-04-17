@@ -48,37 +48,28 @@
 }
 
 - (BOOL)tgzCompress:(NSArray *)paths destination:(NSString *)destinationPath{
-	NSTask *task=[[[NSTask alloc]init]autorelease];
-    [task setLaunchPath:@"/usr/bin/tar"];
     NSMutableArray *arguments=[NSMutableArray arrayWithObjects:@"-zcf",destinationPath,nil];
-   for(NSString *path in paths){
+    for(NSString *path in paths){
 		[arguments addObject:@"-C"];
 		[arguments addObject:[path stringByDeletingLastPathComponent]];
 		[arguments addObject:[path lastPathComponent]];
 	}
-	[task setArguments:arguments];
-	[task launch];
-	[task waitUntilExit];
-	return [task terminationStatus]==0;	
+    return [self runPath:@"/usr/bin/tar" arguments:arguments];
 }
+
 - (BOOL)tbzCompress:(NSArray *)paths destination:(NSString *)destinationPath{
-	NSTask *task=[[[NSTask alloc]init]autorelease];
-    [task setLaunchPath:@"/usr/bin/tar"];
     NSMutableArray *arguments=[NSMutableArray arrayWithObjects:@"-jcf",destinationPath,nil];
-   for(NSString *path in paths){
+    for(NSString *path in paths){
 		[arguments addObject:@"-C"];
 		[arguments addObject:[path stringByDeletingLastPathComponent]];
 		[arguments addObject:[path lastPathComponent]];
 	}
-	[task setArguments:arguments];
-	[task launch];
-	[task waitUntilExit];
-	return [task terminationStatus]==0;	
+    return [self runPath:@"/usr/bin/tar" arguments:arguments];
+    
 }
+
 - (BOOL)cpgzCompress:(NSArray *)paths destination:(NSString *)destinationPath{
 	
-	NSTask *task=[[[NSTask alloc]init]autorelease];
-    [task setLaunchPath:@"/usr/bin/ditto"];
     NSMutableArray *arguments=[NSMutableArray arrayWithObjects:@"-c",@"-z",@"-rsrc",@"--keepParent",nil];
 	if ([paths count] > 1)
 	{
@@ -89,15 +80,12 @@
 		[arguments addObjectsFromArray:paths];
 	
     [arguments addObject: destinationPath];
-    [task setArguments:arguments];
-    [task launch];
-    [task waitUntilExit];
-	return [task terminationStatus]==0;	
+    return [self runPath:@"/usr/bin/ditto" arguments:arguments];
+
 }
+
 - (BOOL)cpioCompress:(NSArray *)paths destination:(NSString *)destinationPath{
 	
-	NSTask *task=[[[NSTask alloc]init]autorelease];
-    [task setLaunchPath:@"/usr/bin/ditto"];
     NSMutableArray *arguments=[NSMutableArray arrayWithObjects:@"-c",@"-rsrc",@"--keepParent",nil];
 	if ([paths count] > 1)
 	{
@@ -107,10 +95,8 @@
 	else
 		[arguments addObjectsFromArray:paths];
     [arguments addObject: destinationPath];
-    [task setArguments:arguments];
-    [task launch];
-    [task waitUntilExit];
-	return [task terminationStatus]==0;	
+    return [self runPath:@"/usr/bin/ditto" arguments:arguments];
+
 }
 
 - (BOOL)p7zipCompress:(NSArray *)paths destination:(NSString *)destinationPath{
@@ -128,8 +114,6 @@
 
 - (BOOL)zipCompress:(NSArray *)paths destination:(NSString *)destinationPath{
 	
-	NSTask *task = [[[NSTask alloc]init]autorelease];
-	[task setLaunchPath:@"/usr/bin/ditto"];
     NSMutableArray *arguments=[NSMutableArray arrayWithObjects:@"-c",@"-k",@"-rsrc",@"--keepParent",nil];
 
 	// If there's more than 1 source directory
@@ -142,14 +126,18 @@
 	else
 		[arguments addObjectsFromArray:paths];
     [arguments addObject: destinationPath];
-    [task setArguments:arguments];
-    [task launch];
-	//NSLog(@"task %@", task);
-    [task waitUntilExit];
-	return [task terminationStatus]==0;	
+    return [self runPath:@"/usr/bin/ditto" arguments:arguments];
 }
 
 
+- (BOOL)runPath:(NSString *)path arguments:(NSArray *)arguments {
+    NSTask *task = [[NSTask alloc] init];
+    [task setLaunchPath:path];
+    [task setArguments:arguments];
+    [task launch];
+    [task waitUntilExit];
+    return [task terminationStatus] == 0;
+}
 
 - (QSObject *)compressFile:(QSObject *)dObject {
 	return [self compressFile:dObject withFormat:nil];
@@ -222,12 +210,19 @@
         NSLog(@"Could not find handler to compress %@. No related handler could be found. Aborting", type);
         QSShowAppNotifWithAttributes(@"QSCompressionPlugin", NSLocalizedStringForThisBundle(@"Unable to compress file", @"Error notif title"), [NSString stringWithFormat:NSLocalizedStringForThisBundle(@"An error occurred trying to compress %@", @"Error notif text"), sourcePaths]);
     }
-	NSString *extension=[info objectForKey:@"extension"];
+    
+	NSString *extension = (__bridge_transfer NSString *)UTTypeCopyPreferredTagWithClass((__bridge CFStringRef)type, kUTTagClassFilenameExtension);
+    if (!extension) {
+        [info objectForKey:@"extension"];
+    }
 	if (extension)
 		destinationPath=[destinationPath stringByAppendingPathExtension:extension];
 	destinationPath=[destinationPath firstUnusedFilePath];
-	//NSLog(@"info %@ %@",info,destinationPath);
-	BOOL success=(BOOL)[self performSelector:NSSelectorFromString([info objectForKey:@"selector"]) withObject:sourcePaths withObject:destinationPath];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    // no leaks here, since the return value of all xxxCompress:destination methods is a BOOL
+	BOOL success = (BOOL) [self performSelector:NSSelectorFromString([info objectForKey:@"selector"]) withObject:sourcePaths withObject:destinationPath];
+#pragma clang diagnostic pop
 	if (success){
 		[[NSWorkspace sharedWorkspace] noteFileSystemChanged:[destinationPath stringByDeletingLastPathComponent]];
         QSObject *archive = [QSObject fileObjectWithPath:destinationPath];
