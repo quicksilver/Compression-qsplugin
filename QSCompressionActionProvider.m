@@ -160,7 +160,13 @@
     NSBundle *archiveUtilityBundle = [NSBundle bundleWithIdentifier:kArchiveUtilityBundleID];
     
 	foreachkey(ident, compressor,[QSReg tableNamed:@"QSFileCompressors"]){
-		QSObject *object = [QSObject objectWithString:ident name:ident type:@"qs.filecompressortype"];
+        NSString *desc = (__bridge_transfer NSString *)UTTypeCopyDescription(((__bridge CFStringRef)ident));
+        
+        NSString *name = (__bridge_transfer NSString *)UTTypeCopyPreferredTagWithClass((__bridge CFStringRef)ident, kUTTagClassFilenameExtension);
+		QSObject *object = [QSObject objectWithString:ident name:name ? name : ident type:@"qs.filecompressortype"];
+        if (desc) {
+            [object setDetails:desc];
+        }
 		NSString *iconName = [compressor objectForKey:@"icon"];
         // Attempt to obtain icon from Archive Utility resources folder
         NSImage *icon = [QSResourceManager imageNamed:iconName inBundle:archiveUtilityBundle];
