@@ -70,6 +70,7 @@
 				<string>tgz</string>
 				<string>tbz</string>
 				<string>gz</string>
+				<string>7z</string>
 			</array>
 			<key>directTypes</key>
 			<array>
@@ -103,15 +104,15 @@
 		<string>File Compress/Decompress Actions</string>
 		<key>extendedDescription</key>
 		<string>&lt;h2&gt;Overview&lt;/h2&gt;
-&lt;p&gt;The File Compression Plugin allows compression and decompression of files using Apple's Archive Utility application.&lt;/p&gt;
+&lt;p&gt;The File Compression Plugin allows compression and decompression of files using Apple's Archive Utility application. In addition, it supports &lt;code&gt;7z&lt;/code&gt; files using &lt;a href="http://p7zip.sourceforge.net/"&gt;p7zip&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;Actions&lt;/h2&gt;
 &lt;dl&gt;
 &lt;dt&gt;Compress&lt;/dt&gt;
 &lt;dd&gt;Compresses the object(s) in the first pane using the default compression type (see 'Preferences' section below)&lt;/dd&gt;
 &lt;dt&gt;Compress Using…&lt;/dt&gt;
-&lt;dd&gt;Allows the object(s) in the first pane to be compressed using one of: &lt;code&gt;zip&lt;/code&gt;, &lt;code&gt;tbz&lt;/code&gt;, &lt;code&gt;tgz&lt;/code&gt;, &lt;code&gt;cpio&lt;/code&gt;, &lt;code&gt;cpgz&lt;/code&gt;&lt;/dd&gt;
+&lt;dd&gt;Allows the object(s) in the first pane to be compressed using one of: &lt;code&gt;zip&lt;/code&gt;, &lt;code&gt;tbz&lt;/code&gt;, &lt;code&gt;tgz&lt;/code&gt;, &lt;code&gt;cpio&lt;/code&gt;, &lt;code&gt;cpgz&lt;/code&gt;, &lt;code&gt;7z&lt;/code&gt;&lt;/dd&gt;
 &lt;dt&gt;Decompress&lt;/dt&gt;
-&lt;dd&gt;Decompress files using Archive Utility&lt;/dd&gt;
+&lt;dd&gt;Decompress files using Archive Utility or &lt;code&gt;p7zip&lt;/code&gt;&lt;/dd&gt;
 &lt;/dl&gt;
 &lt;h2&gt;Preferences&lt;/h2&gt;
 &lt;p&gt;The plugin adds a preference pane to Quicksilver, allowing you to:&lt;/p&gt;
@@ -120,7 +121,9 @@
 &lt;li&gt;Choose the default compression type to use for the 'Compress' action&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2&gt;Trigger Events&lt;/h2&gt;
-&lt;p&gt;Event Triggers can be run based on two events in this plugin: Compress and Decompress. For both actions, the "Event Trigger Object" will refer to the archive file.&lt;/p&gt;</string>
+&lt;p&gt;Event Triggers can be run based on two events in this plugin: Compress and Decompress. For both actions, the "Event Trigger Object" will refer to the archive file.&lt;/p&gt;
+&lt;h2&gt;Decompressing Multiple Times&lt;/h2&gt;
+&lt;p&gt;If you decompress multiple times into the same folder, Archive Utility will rename files at the top-level to avoid a conflict. By contrast, &lt;code&gt;p7zip&lt;/code&gt; will rename files &lt;em&gt;within nested folders&lt;/em&gt;, so do not be surprised if decompressing multiple times does not produce separate copies of a decompressed folder.&lt;/p&gt;</string>
 		<key>icon</key>
 		<string>com.apple.archiveutility</string>
 	</dict>
@@ -133,6 +136,17 @@
 		</dict>
 		<key>QSFileCompressors</key>
 		<dict>
+			<key>7z</key>
+			<dict>
+				<key>class</key>
+				<string>QSCompressionActionProvider</string>
+				<key>extension</key>
+				<string>7z</string>
+				<key>icon</key>
+				<string>bah-7z</string>
+				<key>selector</key>
+				<string>p7zipCompress:destination:</string>
+			</dict>
 			<key>cpgz</key>
 			<dict>
 				<key>class</key>

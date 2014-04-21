@@ -1,4 +1,5 @@
 #import "QSCompressionActionProvider.h"
+#import <QSCore/QSObject_FileHandling.h>
 
 # define pArchiveUtility @"/System/Library/CoreServices/Archive Utility.app"
 # define kFileDecompressAction @"QSFileDecompressAction"
@@ -112,6 +113,18 @@
 	return [task terminationStatus]==0;	
 }
 
+- (BOOL)p7zipCompress:(NSArray *)paths destination:(NSString *)destinationPath{
+    NSTask *task=[[[NSTask alloc]init]autorelease];
+    // 7zr is the minimal binary version. See https://wiki.archlinux.org/index.php/p7zip#Differences_between_7z.2C_7za_and_7zr_binaries
+    NSString *p7zBinary = [[NSBundle bundleForClass:[self class]] pathForResource:@"7zr" ofType:@""];
+    [task setLaunchPath:p7zBinary];
+    NSMutableArray *arguments=[NSMutableArray arrayWithObjects:@"a",destinationPath,nil];
+    [arguments addObjectsFromArray:paths];
+    [task setArguments:arguments];
+    [task launch];
+    [task waitUntilExit];
+    return [task terminationStatus]==0;
+}
 
 - (BOOL)zipCompress:(NSArray *)paths destination:(NSString *)destinationPath{
 	
@@ -225,8 +238,31 @@
 
 - (QSObject *)decompressFile:(QSObject *)dObject{        
     for (QSObject *archive in [dObject splitObjects]) {
+        
+        bool is7Z = QSTypeConformsTo([archive fileUTI], @"org.7-zip.7-zip-archive");
+        NSLog(@"7z: %d", is7Z);
+        
         NSString *path = [archive objectForType:QSFilePathType];
-        [[NSWorkspace sharedWorkspace] openFile:path withApplication:pArchiveUtility];
+        
+        if (is7Z) {
+            NSTask *task=[[[NSTask alloc]init]autorelease];
+            // 7zr is the minimal binary version. See https://wiki.archlinux.org/index.php/p7zip#Differences_between_7z.2C_7za_and_7zr_binaries
+            NSString *p7zBinary = [[NSBundle bundleForClass:[self class]] pathForResource:@"7zr" ofType:@""];
+            [task setLaunchPath:p7zBinary];
+            [task setCurrentDirectoryPath:[path stringByDeletingLastPathComponent]];
+            // -aou: Auto rename all (avoid conflict with existing files).
+            // This behavious is similar to Archive Utility, except with underscores instead of spaces.
+            NSMutableArray *arguments=[NSMutableArray arrayWithObjects:@"x",@"-aou",path,nil];
+            [task setArguments:arguments];
+            [task launch];
+            [task waitUntilExit];
+            
+            NSLog(@"done");
+        }else {
+            // Use Archive Utility
+            [[NSWorkspace sharedWorkspace] openFile:path withApplication:pArchiveUtility];
+        }
+        
         NSDictionary *info = @{@"object": archive};
         [[NSNotificationCenter defaultCenter] postNotificationName:@"QSEventNotification" object:@"QSFileDecompressComplete" userInfo:info];
     }
