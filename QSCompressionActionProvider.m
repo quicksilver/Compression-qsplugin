@@ -227,7 +227,6 @@
 		return archive;
 	}else{
 		NSBeep();
-		return nil;
 	}
 	return nil;
 }
