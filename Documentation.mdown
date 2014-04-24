@@ -8,7 +8,9 @@ Compress
   : Compresses the object(s) in the first pane using the default compression type (see 'Preferences' section below)
 
 Compress Using…
-  : Allows the object(s) in the first pane to be compressed using one of: `zip`, `tbz`, `tgz`, `cpio`, `cpgz`, `7z`
+  : Allows the object(s) in the first pane to be compressed using one of: `zip`, `tbz2`[^1], `tgz`, `cpio`, `cpgz`, `7z`
+  
+[^1]: The `tbz2` extension is used as opposed to `tbz`, since this is the OS-preferred extension.
 
 Decompress
   : Decompress files using Archive Utility or `p7zip`
