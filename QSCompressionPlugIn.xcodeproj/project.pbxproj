@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0DBBDD8918E32AB7000C5733 /* 7zr in Resources */ = {isa = PBXBuildFile; fileRef = 0DBBDD8818E32AB7000C5733 /* 7zr */; };
 		7F35FF4007F9ACD90056051D /* QSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F35FF3C07F9ACD90056051D /* QSCore.framework */; };
-		7F35FF4207F9ACD90056051D /* QSFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F35FF3E07F9ACD90056051D /* QSFoundation.framework */; };
 		7F6994D9096ECFAF00420E96 /* QSCompressionPrefPane.nib in Resources */ = {isa = PBXBuildFile; fileRef = 7F6994D8096ECFAF00420E96 /* QSCompressionPrefPane.nib */; };
 		7FB8AFA308E70BAF000A65C4 /* QSCompressionActionProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8AFA208E70BAF000A65C4 /* QSCompressionActionProvider.m */; };
 		8D1AC9700486D14A00FE50C9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD92D38A0106425D02CA0E72 /* Cocoa.framework */; };
@@ -22,15 +21,10 @@
 		14E61B8B10CFE2D7007663EE /* Developer.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Developer.xcconfig; sourceTree = "<group>"; };
 		14E61B8F10CFE2D7007663EE /* QSPlugIn.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = QSPlugIn.xcconfig; sourceTree = "<group>"; };
 		14E61B9010CFE2D7007663EE /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
-		7F35FF3C07F9ACD90056051D /* QSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QSCore.framework; sourceTree = QSFrameworks; };
-		7F35FF3D07F9ACD90056051D /* QSEffects.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QSEffects.framework; sourceTree = QSFrameworks; };
-		7F35FF3E07F9ACD90056051D /* QSFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QSFoundation.framework; sourceTree = QSFrameworks; };
-		7F35FF3F07F9ACD90056051D /* QSInterface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QSInterface.framework; sourceTree = QSFrameworks; };
+		7F35FF3C07F9ACD90056051D /* QSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QSCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F6994D8096ECFAF00420E96 /* QSCompressionPrefPane.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = QSCompressionPrefPane.nib; sourceTree = "<group>"; };
 		7FB8AFA108E70BAF000A65C4 /* QSCompressionActionProvider.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QSCompressionActionProvider.h; sourceTree = "<group>"; };
 		7FB8AFA208E70BAF000A65C4 /* QSCompressionActionProvider.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = QSCompressionActionProvider.m; sourceTree = "<group>"; };
-		7FFA8E9C0816CCCA00A858CD /* QSEffects.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QSEffects.framework; sourceTree = QSFrameworks; };
-		7FFA8E9D0816CCCA00A858CD /* QSInterface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QSInterface.framework; sourceTree = QSFrameworks; };
 		8D1AC9730486D14A00FE50C9 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1AC9740486D14A00FE50C9 /* File Compression Plugin.qsplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "File Compression Plugin.qsplugin"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD92D38A0106425D02CA0E72 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
@@ -43,7 +37,6 @@
 			files = (
 				8D1AC9700486D14A00FE50C9 /* Cocoa.framework in Frameworks */,
 				7F35FF4007F9ACD90056051D /* QSCore.framework in Frameworks */,
-				7F35FF4207F9ACD90056051D /* QSFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,10 +91,6 @@
 			children = (
 				DD92D38A0106425D02CA0E72 /* Cocoa.framework */,
 				7F35FF3C07F9ACD90056051D /* QSCore.framework */,
-				7F35FF3E07F9ACD90056051D /* QSFoundation.framework */,
-				7FFA8E9C0816CCCA00A858CD /* QSEffects.framework */,
-				7FFA8E9D0816CCCA00A858CD /* QSInterface.framework */,
-				7FC20C8107FB741700FDD3CA /* Other Frameworks */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -115,15 +104,6 @@
 			name = Classes;
 			sourceTree = "<group>";
 		};
-		7FC20C8107FB741700FDD3CA /* Other Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				7F35FF3D07F9ACD90056051D /* QSEffects.framework */,
-				7F35FF3F07F9ACD90056051D /* QSInterface.framework */,
-			);
-			name = "Other Frameworks";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -131,7 +111,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7F6B3EEB085CE8DF000735A8 /* Build configuration list for PBXNativeTarget "File Compression Plugin" */;
 			buildPhases = (
-				E1022B2806B3475D00299BEC /* Update Version and Documentation */,
 				8D1AC9660486D14A00FE50C9 /* Resources */,
 				8D1AC96A0486D14A00FE50C9 /* Sources */,
 				8D1AC96E0486D14A00FE50C9 /* Frameworks */,
@@ -153,12 +132,18 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0510;
+				TargetAttributes = {
+					8D1AC9600486D14A00FE50C9 = {
+						ProvisioningStyle = Manual;
+					};
+				};
 			};
 			buildConfigurationList = 7F6B3EEF085CE8DF000735A8 /* Build configuration list for PBXProject "QSCompressionPlugIn" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 0259C574FE90428111CA0C5A /* QSCompressionPlugIn */;
@@ -181,23 +166,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		E1022B2806B3475D00299BEC /* Update Version and Documentation */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Update Version and Documentation";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-			shellPath = /bin/sh;
-			shellScript = "\"$QS_BUILD_ROOT/Tools/bltrversion\"";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8D1AC96A0486D14A00FE50C9 /* Sources */ = {

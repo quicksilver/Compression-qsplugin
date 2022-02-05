@@ -15,9 +15,9 @@
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.7.2</string>
+	<string>1.8.0</string>
 	<key>CFBundleVersion</key>
-	<string>168</string>
+	<string>169</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2004, Blacktree, Inc.</string>
 	<key>QSActions</key>
@@ -82,7 +82,7 @@
 			<key>name</key>
 			<string>Decompress</string>
 			<key>rankModification</key>
-			<real>4.0</real>
+			<real>4</real>
 			<key>validatesObjects</key>
 			<false/>
 		</dict>
