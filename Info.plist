@@ -15,9 +15,9 @@
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.8.0</string>
+	<string>1.8.1</string>
 	<key>CFBundleVersion</key>
-	<string>169</string>
+	<string>171</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2004, Blacktree, Inc.</string>
 	<key>QSActions</key>
@@ -82,7 +82,7 @@
 			<key>name</key>
 			<string>Decompress</string>
 			<key>rankModification</key>
-			<real>4</real>
+			<real>4.0</real>
 			<key>validatesObjects</key>
 			<false/>
 		</dict>
@@ -111,7 +111,7 @@
 &lt;dt&gt;Compress&lt;/dt&gt;
 &lt;dd&gt;Compresses the object(s) in the first pane using the default compression type (see 'Preferences' section below)&lt;/dd&gt;
 &lt;dt&gt;Compress Using…&lt;/dt&gt;
-&lt;dd&gt;Allows the object(s) in the first pane to be compressed using one of: &lt;code&gt;zip&lt;/code&gt;, &lt;code&gt;tbz2&lt;/code&gt;&lt;sup id="fnref:1"&gt;&lt;a href="#fn:1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;, &lt;code&gt;tgz&lt;/code&gt;, &lt;code&gt;cpio&lt;/code&gt;, &lt;code&gt;cpgz&lt;/code&gt;, &lt;code&gt;7z&lt;/code&gt;&lt;/dd&gt;
+&lt;dd&gt;Allows the object(s) in the first pane to be compressed using one of: &lt;code&gt;zip&lt;/code&gt;, &lt;code&gt;tbz2&lt;/code&gt;&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1"&gt;1&lt;/a&gt;&lt;/sup&gt;, &lt;code&gt;tgz&lt;/code&gt;, &lt;code&gt;cpio&lt;/code&gt;, &lt;code&gt;cpgz&lt;/code&gt;, &lt;code&gt;7z&lt;/code&gt;&lt;/dd&gt;
 &lt;dt&gt;Decompress&lt;/dt&gt;
 &lt;dd&gt;Decompress files using Archive Utility or &lt;code&gt;p7zip&lt;/code&gt;&lt;/dd&gt;
 &lt;/dl&gt;
@@ -119,6 +119,7 @@
 &lt;p&gt;The plugin adds a preference pane to Quicksilver, allowing you to:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Choose whether to compress files to a temporary location first&lt;/li&gt;
+&lt;li&gt;Choose whether to ignore macOS special files (__MACOSX, ._ files) when compressing&lt;/li&gt;
 &lt;li&gt;Choose the default compression type to use for the 'Compress' action&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2&gt;Trigger Events&lt;/h2&gt;
@@ -129,7 +130,7 @@
 &lt;hr&gt;
 &lt;ol&gt;
 &lt;li id="fn:1"&gt;
-&lt;p&gt;The &lt;code&gt;tbz2&lt;/code&gt; extension is used as opposed to &lt;code&gt;tbz&lt;/code&gt;, since this is the OS-preferred extension.&amp;#160;&lt;a href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;tbz2&lt;/code&gt; extension is used as opposed to &lt;code&gt;tbz&lt;/code&gt;, since this is the OS-preferred extension.&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;</string>

@@ -20,7 +20,9 @@ Decompress
 The plugin adds a preference pane to Quicksilver, allowing you to:
 
   * Choose whether to compress files to a temporary location first
+  * Choose whether to ignore macOS special files (__MACOSX, ._ files) when compressing
   * Choose the default compression type to use for the 'Compress' action
+  
 
 ## Trigger Events ##
 
