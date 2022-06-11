@@ -62,7 +62,7 @@
 		[arguments addObject:[path stringByDeletingLastPathComponent]];
 		[arguments addObject:[path lastPathComponent]];
 	}
-    return [self runPath:@"LANG=UTF-8 /usr/bin/tar" arguments:arguments];
+    return [self runPath:@"/usr/bin/tar" arguments:arguments];
 }
 
 - (BOOL)tbzCompress:(NSArray *)paths destination:(NSString *)destinationPath{
