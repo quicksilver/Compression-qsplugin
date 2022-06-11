@@ -11,6 +11,10 @@
 
 @implementation QSCompressionActionProvider
 
+- (BOOL)stripMacFiles {
+	return [[NSUserDefaults standardUserDefaults] boolForKey:@"QSCompressionStripMacFiles"];
+}
+
 -(NSString *)copyMultipleSources:(NSArray *)paths
 {
 	// Create a unique temp folder
@@ -48,17 +52,25 @@
 }
 
 - (BOOL)tgzCompress:(NSArray *)paths destination:(NSString *)destinationPath{
-    NSMutableArray *arguments=[NSMutableArray arrayWithObjects:@"-zcf",destinationPath,nil];
+    NSMutableArray *arguments=[NSMutableArray array];
+	if ([self stripMacFiles]) {
+		[arguments addObjectsFromArray:@[@"--exclude=\"._*\"", @"--exclude='__MACOSX'", @"--exclude='.DS_Store'", @"--disable-copyfile"]];
+	}
+	[arguments addObjectsFromArray:@[@"-zcf", destinationPath]];
     for(NSString *path in paths){
 		[arguments addObject:@"-C"];
 		[arguments addObject:[path stringByDeletingLastPathComponent]];
 		[arguments addObject:[path lastPathComponent]];
 	}
-    return [self runPath:@"/usr/bin/tar" arguments:arguments];
+    return [self runPath:@"LANG=UTF-8 /usr/bin/tar" arguments:arguments];
 }
 
 - (BOOL)tbzCompress:(NSArray *)paths destination:(NSString *)destinationPath{
-    NSMutableArray *arguments=[NSMutableArray arrayWithObjects:@"-jcf",destinationPath,nil];
+    NSMutableArray *arguments=[NSMutableArray array];
+	if ([self stripMacFiles]) {
+		[arguments addObjectsFromArray:@[@"--exclude=\"._*\"", @"--exclude='__MACOSX'", @"--exclude='.DS_Store'", @"--disable-copyfile"]];
+	}
+	[arguments addObjectsFromArray:@[@"-jcf", destinationPath]];
     for(NSString *path in paths){
 		[arguments addObject:@"-C"];
 		[arguments addObject:[path stringByDeletingLastPathComponent]];
@@ -70,7 +82,7 @@
 
 - (BOOL)cpgzCompress:(NSArray *)paths destination:(NSString *)destinationPath{
 	
-    NSMutableArray *arguments=[NSMutableArray arrayWithObjects:@"-c",@"-z",@"-rsrc",@"--keepParent",nil];
+    NSMutableArray *arguments=[NSMutableArray arrayWithObjects:@"-c",@"-z",[self stripMacFiles] ? @"--norsrc" : @"-rsrc",@"--keepParent",nil];
 	if ([paths count] > 1)
 	{
 		NSString *tempPath = [self copyMultipleSources:paths];
@@ -86,7 +98,7 @@
 
 - (BOOL)cpioCompress:(NSArray *)paths destination:(NSString *)destinationPath{
 	
-    NSMutableArray *arguments=[NSMutableArray arrayWithObjects:@"-c",@"-rsrc",@"--keepParent",nil];
+    NSMutableArray *arguments=[NSMutableArray arrayWithObjects:@"-c",[self stripMacFiles] ? @"--norsrc" : @"-rsrc",@"--keepParent",nil];
 	if ([paths count] > 1)
 	{
 		NSString *tempPath = [self copyMultipleSources:paths];
@@ -110,7 +122,7 @@
 
 - (BOOL)zipCompress:(NSArray *)paths destination:(NSString *)destinationPath{
 	
-    NSMutableArray *arguments=[NSMutableArray arrayWithObjects:@"-c",@"-k",@"-rsrc",@"--keepParent",nil];
+	NSMutableArray *arguments=[NSMutableArray arrayWithObjects:@"-c",@"-k", [self stripMacFiles] ? @"--norsrc" : @"-rsrc" ,@"--keepParent",nil];
 
 	// If there's more than 1 source directory
 	// Move all the folders into one folder named 'archive' in the temp folder
